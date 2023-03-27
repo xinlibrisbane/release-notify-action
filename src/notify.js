@@ -86,6 +86,6 @@ let getRecipients = function(recipients_url, callback) {
 }
 
 setCredentials()
-getRecipients(process.env.RECIPIENTS, function(recipients) {
+getRecipients(process.env.BCC_RECIPIENTS_URL, function(recipients) {
   sendEmails(prepareMessage(recipients))
 })
