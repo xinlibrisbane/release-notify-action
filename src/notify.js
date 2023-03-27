@@ -34,7 +34,8 @@ let prepareMessage = function(recipients) {
       .replace("$NEWISSUEURL$", newIssueURL),
 
     releaseBody = converter.makeHtml(eventPayload.release.body + footer),
-    ccRecipents = process.env.RELEASE_NOTES_RECIPIENTS
+    ccRecipents = process.env.RELEASE_NOTES_RECIPIENTS,
+    bccRecipents = process.env.RELEASE_NOTES_BCC_RECIPIENTS
 
   let msg = {
     to: ['subscribers@no-reply.com'],
@@ -42,7 +43,7 @@ let prepareMessage = function(recipients) {
       name: 'GitHub Releases',
       email: process.env.SENDER_EMAIL
     },
-    bcc: recipients,
+    bcc: bccRecipents ? bccRecipents.split(',') : [], //recipients,
     cc:  ccRecipents ? ccRecipents.split(',') : [],
     subject: emailSubject,
     html: releaseBody
