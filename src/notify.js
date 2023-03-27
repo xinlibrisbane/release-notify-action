@@ -33,7 +33,8 @@ let prepareMessage = function(recipients) {
       .replace("$RELEASEURL$", releaseURL)
       .replace("$NEWISSUEURL$", newIssueURL),
 
-    releaseBody = converter.makeHtml(eventPayload.release.body + footer)
+    releaseBody = converter.makeHtml(eventPayload.release.body + footer),
+    ccRecipents = process.env.RELEASE_NOTES_RECIPIENTS
 
   let msg = {
     to: ['subscribers@no-reply.com'],
@@ -42,6 +43,7 @@ let prepareMessage = function(recipients) {
       email: process.env.SENDER_EMAIL
     },
     bcc: recipients,
+    cc:  ccRecipents ? ccRecipents.split(',') : [],
     subject: emailSubject,
     html: releaseBody
   };
