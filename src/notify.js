@@ -13,7 +13,7 @@ let setCredentials = function(){
   sgMail.setApiKey(process.env.SENDGRID_API_TOKEN)
 }
 
-let prepareMessage = function(recipients) {
+let prepareMessage = function() {
 
   let eventPayload = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
     converter = new showdown.Converter(),
@@ -89,6 +89,9 @@ let getRecipients = function(recipients_url, callback) {
 }
 
 setCredentials()
-getRecipients(process.env.BCC_RECIPIENTS_URL, function(recipients) {
-  sendEmails(prepareMessage(recipients))
-})
+
+// getRecipients(process.env.BCC_RECIPIENTS_URL, function(recipients) {
+//  sendEmails(prepareMessage(recipients))
+// })
+
+sendEmails(prepareMessage())
