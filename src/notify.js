@@ -36,7 +36,7 @@ let prepareMessage = function(recipients) {
     releaseBody = converter.makeHtml(eventPayload.release.body + footer)
 
   let msg = {
-    to: process.env.SENDER_EMAIL,
+    to: ['subscribers@no-reply.com'],
     from: {
       name: 'GitHub Releases',
       email: process.env.SENDER_EMAIL
